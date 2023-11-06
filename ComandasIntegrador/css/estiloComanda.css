@@ -1,0 +1,11 @@
+#navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center ;
+    float: center;
+    padding: 3% !important;  
+    box-shadow: 7px 7px 13px 0px rgba(90, 87, 87, 0.22);
+    margin-bottom: 2%;
+    background-color: white !important;
+}
