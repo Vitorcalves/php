@@ -28,8 +28,10 @@
         </div>
 
         <form class="g-3" action="<?= $_GET['acao'] ?>Comanda.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_PRODUTOS : "" ?>">
+            <input type="hidden" name="id" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_COMANDA : ""?>">
 
+
+            <?= var_dump($dados) ?>
             <div class="row">
                 <div class="col-12">
                     <label for="DESCRICAO_COMANDA" class="form-label">Nome do Cliente</label>
@@ -40,8 +42,9 @@
                 </div>
                 
                 <div class="col-6">
-                    <label for="MESA_ID_MESA" class="form-label">Status</label>
+                    <label for="MESA_ID_MESA" class="form-label">Mesa</label>
                     <select name="MESA_ID_MESA" id="MESA_ID_MESA" class="form-control" required>
+                        <option value=""  <?= isset($dados->MESA_ID_MESA) ? $dados->MESA_ID_MESA == "" ? "selected" : "" : "" ?>>...</option>
                         <?php foreach ($aMesa as $MESA): ?>
                             <option <?= (isset($dados->MESA_ID_MESA) ? ($dados->MESA_ID_MESA == $MESA['ID_MESA'] ? 'selected' : '') : "") ?> 
                             value="<?= $MESA['ID_MESA'] ?>"><?= $MESA['ID_MESA'] ?></option>

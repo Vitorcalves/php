@@ -8,16 +8,18 @@ if (isset($_POST['MESA_ID_MESA'])) {
 
     try {
         $result = $db->dbUpdate("UPDATE comanda 
-                                SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?",
+                                SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?
+                                WHERE ID_COMANDA = ?",
                                 [
                                     $_POST['DESCRICAO_COMANDA'],
                                     $_POST['MESA_ID_MESA'],
+                                    $_POST['id']
                                 ]);
 
         if ($result) {
             return header("Location: index.php?msgSucesso=Registro alterado com sucesso.");
         } else {
-            return header("Location: index.php?msgError=Falha ao tentar alterar o registro.");
+            // return header("Location: index.php?msgError=Falha ao tentar alterar o registro.");
         }
         
     } catch (Exception $ex) {
@@ -25,5 +27,5 @@ if (isset($_POST['MESA_ID_MESA'])) {
     }
 
 } else {
-    // return header("Location: index.php");
+    return header("Location: index.php");
 }
