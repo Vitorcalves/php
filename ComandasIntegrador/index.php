@@ -10,6 +10,7 @@
      // Buscar a lista de Rotas na base de dados
  
      $data = $db->dbSelect("SELECT * FROM comanda ORDER BY ID_COMANDA");
+     var_dump($data);
 ?>
 
     <main class="container mt-5">
@@ -54,27 +55,36 @@
                                 <a href="formComanda.php?acao=view&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
                                 
                                 
-                                <button id="alterar_status" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status()"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>
+                                <button id="<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status(this)"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>
 
                             </td>
                         </tr>
-                        <script>
-                            function alterar_status(){
-                                let Status = <?= $row['SITUACAO_COMANDA'] ?>;
-                                let id = <?= $row['ID_COMANDA'] ?>;
-                                if(Status == 1){
-                                    Status = 2;
-                                }else{
-                                    Status = 1;
-                                }
-                                window.location.href = "alterarStatusComanda.php?status="+Status+"&id="+id;
-                                }
-                        </script>
                         <?php
                     }
-                ?>
+                    ?>
             </tbody>
         </table>
+                    <script>
+                        const tabela = <?= json_encode($data) ?>;
+                        var comanda;
+                        console.log(tabela);
+                        function alterar_status(botao){
+                            let id = +botao.id;
+
+                            comanda = tabela.find(item => item.ID_COMANDA === id);
+                            console.log(comanda);
+                            
+                            
+                            let Status= comanda.SITUACAO_COMANDA ;
+                            // id = <?= $row['ID_COMANDA'] ?>;
+                            if(Status == 1){
+                                Status = 2;
+                            }else{
+                                Status = 1;
+                            }
+                            window.location.href = "alterarStatusComanda.php?status="+Status+"&id="+id;
+                            }
+                    </script>
     </main>
 
 <?php
