@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 08-Nov-2023 às 00:32
+-- Tempo de geração: 08-Nov-2023 às 19:46
 -- Versão do servidor: 8.0.35-0ubuntu0.22.04.1
 -- versão do PHP: 8.1.2-1ubuntu2.14
 
@@ -26,6 +26,9 @@ SET time_zone = "+00:00";
 --
 -- Estrutura da tabela `categoria`
 --
+create database restaurante;
+
+USE restaurante;
 
 CREATE TABLE `categoria` (
   `ID_CATEGORIA` int NOT NULL,
@@ -60,7 +63,9 @@ CREATE TABLE `comanda` (
 --
 
 INSERT INTO `comanda` (`ID_COMANDA`, `SITUACAO_COMANDA`, `DATA_ABERTURA`, `DATA_FECHAMENTO`, `MESA_ID_MESA`, `DESCRICAO_COMANDA`) VALUES
-(1, 2, '2023-11-01 14:34:38', NULL, 1, 'TESTE');
+(5, 1, '2023-11-01 14:34:38', NULL, 1, 'TEST'),
+(2, 1, '2023-11-08 16:43:20', NULL, 3, 'gfuf'),
+(6, 1, '2023-11-08 22:18:26', NULL, 2, '');
 
 -- --------------------------------------------------------
 
@@ -218,7 +223,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `comanda`
 --
 ALTER TABLE `comanda`
-  MODIFY `ID_COMANDA` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_COMANDA` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `formas_pagamento`

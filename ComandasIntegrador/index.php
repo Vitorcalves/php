@@ -10,7 +10,7 @@
      // Buscar a lista de Rotas na base de dados
  
      $data = $db->dbSelect("SELECT * FROM comanda ORDER BY ID_COMANDA");
-     var_dump($data);
+     
 ?>
 
     <main class="container mt-5">
@@ -67,12 +67,12 @@
                     <script>
                         const tabela = <?= json_encode($data) ?>;
                         var comanda;
-                        console.log(tabela);
+                        
                         function alterar_status(botao){
                             let id = +botao.id;
 
                             comanda = tabela.find(item => item.ID_COMANDA === id);
-                            console.log(comanda);
+                            
                             
                             
                             let Status= comanda.SITUACAO_COMANDA ;
