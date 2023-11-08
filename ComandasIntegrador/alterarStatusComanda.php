@@ -9,20 +9,49 @@
         try {
             $id = $_GET['id'];
             $status = $_GET['status'];
+            
 
-            $result = $db->dbUpdate("UPDATE comanda
-                                    SET SITUACAO_COMANDA = ?
-                                    WHERE ID_COMANDA = ?",
-                                    [
-                                        $status,
-                                       $id
-                                    ]);
+            if ($status == 2) {
+                $horario = date('Y-m-d H:i:s');
 
-            if ($result) {
-                header("Location: index.php");
+                $result = $db->dbUpdate("UPDATE comanda
+                                        SET SITUACAO_COMANDA = ?,
+                                        DATA_FECHAMENTO = ?
+                                        WHERE ID_COMANDA = ?",
+
+                                        [
+                                            $status,
+                                            $horario,
+                                            $id
+                                            
+                                        ]);
+    
+                if ($result) {
+                    header("Location: index.php");
+                } else {
+                    echo "Erro ao alterar o status da comanda";
+                }
+
             } else {
-                echo "Erro ao alterar o status da comanda";
+                $result = $db->dbUpdate("UPDATE comanda
+                                        SET SITUACAO_COMANDA = ?,
+                                        DATA_FECHAMENTO = ?
+                                        WHERE ID_COMANDA = ?",
+
+                                        [
+                                            $status,
+                                            null,
+                                            $id
+                                            
+                                        ]);
+    
+                if ($result) {
+                    header("Location: index.php");
+                } else {
+                    echo "Erro ao alterar o status da comanda";
+                }
             }
+
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
