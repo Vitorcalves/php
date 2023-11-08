@@ -17,6 +17,8 @@
             return " - Exclusão";
         } elseif ($acao == "view") {
             return " - Visualização";
+        }else{
+            return "";
         }
     }
 
@@ -48,9 +50,9 @@
     {
         // muda o statusRegistro para 1 = "Ativo" e 2 "Inativo"
         if ($status == 1) {
-            return "Ativo";
+            return "Aberta";
         } elseif ($status == 2) {
-            return "Inativo";
+            return "Fechada";
         } else {
             return "...";
         }
@@ -128,4 +130,5 @@
                         </div>
                     </div>';
         }
+        return "";
     }

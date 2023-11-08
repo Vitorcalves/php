@@ -13,8 +13,8 @@ class Database
         try {
             $conn = new PDO(
                 "mysql:host=localhost;dbname=restaurante", 
-                "root", 
-                "",
+                "vitor", 
+                "xuh7km2&ujGR!U",
                 // define o padrão de codificação que será usado pelo banco de dados
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
             );
@@ -117,7 +117,7 @@ class Database
             }
         
         // se houver algum erro na conexao com o banco de dados é retornado pelo bloco catch
-        } catch (Exception $ex) {
+        }catch (Exception $ex) {
             echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>"; exit;
             return false;
         }

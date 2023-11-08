@@ -31,7 +31,7 @@
                     <th>Id</th>
                     <th>Data abertura</th>
                     <th>Data fechamento</th>
-                    <th>Descrição</th>
+                    <th>Cliente</th>
                     <th>Mesa</th>
                     <th>Status</th>
                     <th>Opções</th>
@@ -52,8 +52,24 @@
                                 <a href="formComanda.php?acao=update&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração">Alterar</a>&nbsp;
                                 <a href="formComanda.php?acao=delete&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-danger btn-sm" title="Exclusão">Excluir</a>&nbsp;
                                 <a href="formComanda.php?acao=view&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
+                                
+                                
+                                <button id="alterar_status" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status()"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>
+
                             </td>
                         </tr>
+                        <script>
+                            function alterar_status(){
+                                let Status = <?= $row['SITUACAO_COMANDA'] ?>;
+                                let id = <?= $row['ID_COMANDA'] ?>;
+                                if(Status == 1){
+                                    Status = 2;
+                                }else{
+                                    Status = 1;
+                                }
+                                window.location.href = "alterarStatusComanda.php?status="+Status+"&id="+id;
+                                }
+                        </script>
                         <?php
                     }
                 ?>
