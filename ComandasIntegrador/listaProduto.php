@@ -12,14 +12,8 @@
     $db = new Database();
 
     // Buscar a lista de Categorias de Produtos na base de dados
-    $data = $db->dbSelect(
-        "SELECT p.*, pc.descricao_categoria AS categoriaDescricao
-        FROM produto AS p 
-        INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id
-        ORDER BY p.descricao"
+    $data = $db->dbSelect("SELECT p.*, pc.descricao_categoria AS categoriaDescricao FROM produtos AS p INNER JOIN categoria as pc ON pc.ID_CATEGORIA = p.CATEGORIA_ID_CATEGORIA ORDER BY p.descricao"
     );
-
-
 ?>
 
     <main class="container mt-5">
@@ -73,10 +67,11 @@
                         ?>
                         <tr>
                             <td><?= $row['ID_PRODUTOS'] ?></td>
-                            <td><?= $row['descricao'] ?></td>
+                            <td><?= $row['DESCRICAO'] ?></td>
                             <td class="text-end"><?= number_format($row['VALOR_UNITARIO'], 2, ",", ".") ?></td>
+                            <td><?= $row['QTD_ESTOQUE'] ?></td>
                             <td><?= $row['categoriaDescricao'] ?></td>
-                            <td><?= getStatusDescricao($row['STATUS_PRODUTO']) ?></td>
+                            <!-- <td><?= getStatusDescricao($row['STATUS_PRODUTO']) ?></td> -->
                             <td>
                                 <a href="formProduto.php?acao=update&id=<?= $row['ID_PRODUTOS'] ?>" class="btn btn-outline-primary btn-sm"   title="Alteração">Alterar</a>&nbsp;
                                 <a href="formProduto.php?acao=delete&id=<?= $row['ID_PRODUTOS'] ?>" class="btn btn-outline-danger btn-sm"    title="Exclusão">Excluir</a>&nbsp;
