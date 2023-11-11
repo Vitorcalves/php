@@ -52,7 +52,7 @@
                             <td>
                                 <a href="formComanda.php?acao=update&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração">Alterar</a>&nbsp;
                                 <a href="formComanda.php?acao=delete&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-danger btn-sm" title="Exclusão">Excluir</a>&nbsp;
-                                <a href="formComanda.php?acao=view&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
+                                <a href="visualizarItensComanda.php?id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
                                 
                                 
                                 <button id="<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status(this)"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>
