@@ -43,6 +43,9 @@
                         <a class="nav-link active" aria-current="page" href="produtos.php">Produtos</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Relatorios.php">relatorios</a>
+                    </li>
                     <!-- Se o usuário estiver no nivel administrador mostra esse dropdown com as área administrativa -->
                     <?php if (isset($_SESSION['userId']) && ($_SESSION['userNivel'] == 1)): ?>
                     <li class="nav-item dropdown">
