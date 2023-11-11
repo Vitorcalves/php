@@ -73,12 +73,19 @@
                             <td><?= $row['categoriaDescricao'] ?></td>
                             <!-- <td><?= getStatusDescricao($row['STATUS_PRODUTO']) ?></td> -->
                             <td>
+                            <?php if (isset($_GET["idComanda"])): /* botão gravar não é exibido na visualização dos dados */ ?>
+                                <!-- <button type="submit" class="btn btn-primary btn-sm">adicionar</button> -->
+                                <a href="inserirProdutoComanda.php?idProduto=<?= $row['ID_PRODUTOS'] ?>" class="btn btn-primary btn-sm">adicionar</a>
+                            <?php endif; ?>
+                            <?php if (!isset($_GET["idComanda"])): ?>
+
                                 <a href="formProduto.php?acao=update&id=<?= $row['ID_PRODUTOS'] ?>" class="btn btn-outline-primary btn-sm"   title="Alteração">Alterar</a>&nbsp;
                                 <a href="formProduto.php?acao=delete&id=<?= $row['ID_PRODUTOS'] ?>" class="btn btn-outline-danger btn-sm"    title="Exclusão">Excluir</a>&nbsp;
                                 <a href="formProduto.php?acao=view&id=<?= $row['ID_PRODUTOS'] ?>"   class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
+                            <?php endif; ?>
                             </td>
                         </tr>
-                        <?php
+                <?php
                     }
                 ?>
             </tbody>

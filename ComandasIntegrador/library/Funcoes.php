@@ -77,6 +77,7 @@ class Funcoes
         $db->dbUpdate("UPDATE comanda SET SITUACAO_COMANDA = ? WHERE ID_COMANDA = ?", [$dados->SITUACAO_COMANDA, $dados->ID_COMANDA]);
 
     }
+   
     // public static function redirectPageSearch($pagina) 
     // {
     //     require_once "library/Database.php";
@@ -89,4 +90,8 @@ class Funcoes
     //         }
     //     }
     // }
+}
+function total_valor($quantidade, $Valor){
+    $total = $quantidade * $Valor;
+    return $total;
 }

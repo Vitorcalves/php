@@ -20,12 +20,10 @@
             exit(); // para o script
 
             // recupera todos os itens
-            $data = $db->dbSelect(
-                "SELECT p.*, pc.descricao_categoria AS categoriaDescricao
-                FROM produto AS p 
-                INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p.STATUS_PRODUTO = 1
-                ORDER BY p.descricao"
-            );
+            $data = $db->dbSelect("SELECT p.*, pc.descricao_categoria AS categoriaDescricao FROM produto AS p INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p. STATUS_PRODUTO = 1
+            ORDER BY p.descricao");
+
+    
         }
 
     } else
