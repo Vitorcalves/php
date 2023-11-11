@@ -28,7 +28,8 @@
         </div>
 
         <form class="g-3" action="<?= $_GET['acao'] ?>Comanda.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_PRODUTOS : "" ?>">
+            <input type="hidden" name="id" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_COMANDA : "" ?>">
+            <?= var_dump($dados) ?>
 
             <div class="row">
                 <div class="col-12">

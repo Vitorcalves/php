@@ -7,6 +7,9 @@ if (isset($_POST['MESA_ID_MESA'])) {
     $db = new Database();
 
     try {
+        var_dump($_POST['MESA_ID_MESA']);
+        var_dump($_POST['DESCRICAO_COMANDA']);
+        var_dump($_POST['id']);
         $result = $db->dbUpdate("UPDATE comanda 
                                 SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?
                                 WHERE ID_COMANDA = ?",
@@ -17,9 +20,9 @@ if (isset($_POST['MESA_ID_MESA'])) {
                                 ]);
 
         if ($result) {
-            return header("Location: index.php?msgSucesso=Registro alterado com sucesso.");
+            return header("Location: listaComanda.php?msgSucesso=Registro alterado com sucesso.");
         } else {
-            // return header("Location: index.php?msgError=Falha ao tentar alterar o registro.");
+            return header("Location: listaComanda.php?msgError=Falha ao tentar alterar o registro.");
         }
         
     } catch (Exception $ex) {

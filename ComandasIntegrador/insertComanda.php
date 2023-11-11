@@ -18,9 +18,9 @@
                                     ]);
 
             if ($result) {
-                return header("Location: index.php?msgSucesso=Registro inserido com sucesso.");
+                return header("Location: listaComanda.php?msgSucesso=Registro inserido com sucesso.");
             } else {
-                return header("Location: index.php?msgError=Falha ao tentar inserir o registro.");
+                return header("Location: listaComanda.php?msgError=Falha ao tentar inserir o registro.");
             }
             
         } catch (Exception $ex) {

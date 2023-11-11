@@ -27,7 +27,7 @@
                                         ]);
     
                 if ($result) {
-                    header("Location: index.php");
+                    header("Location: listaComanda.php");
                 } else {
                     echo "Erro ao alterar o status da comanda";
                 }
@@ -46,7 +46,7 @@
                                         ]);
     
                 if ($result) {
-                    header("Location: index.php");
+                    header("Location: listaComanda.php");
                 } else {
                     echo "Erro ao alterar o status da comanda";
                 }
