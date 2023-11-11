@@ -11,8 +11,7 @@
     // $produtosComanda = $db->dbSelect("SELECT * FROM itens_comanda WHERE COMANDA_ID_COMANDA = ?", 'all', [$_GET['id']]);
     $produtos = $db->dbSelect("SELECT * FROM produtos ORDER BY descricao");
     
-    var_dump($produtos);
-    var_dump($dados);
+
 
 
     // $produtosComanda = $db->dbSelect("SELECT itens_comanda.*, produtos.DESCRICAO
@@ -26,19 +25,19 @@
     ORDER BY produtos.DESCRICAO", 'all', [$_GET['id']]);
 
     
-    var_dump($produtosComanda);
+    
 ?>
 <main class="container mt-5">
 
-<!-- <div class="row">
+<div class="row">
     <div class="col-10">
         <h2>Produtos Comanda</h2>
     </div>
     <div class="col-2 text-end">
-        <a href="formProduto.php?acao=insert" class="btn btn-outline-success btn-sm" title="Novo">Nova</a>
+        <a href="listaProduto.php?idComanda=<?= $_GET['id'] ?>" class="btn btn-outline-success btn-sm" title="Nova">Novo</a>
     </div>
 
-</div> -->
+</div>
 
 <div class="row">
     <div class="col-12">
@@ -84,7 +83,8 @@
                     <td><?= $row['DESCRICAO'] ?></td>
                     <td><?= $row['QUANTIDADE'] ?></td>
                     <td><?= $row['VALOR_UNITARIO'] ?> </td>
-                    <td id"<?= $contador ?>"></td>
+                    <td><?= total_valor($row["QUANTIDADE"],$row["VALOR_UNITARIO"]) ?></td>
+
                     
 
                     <td>
@@ -93,19 +93,7 @@
                         <a href="formProduto.php?acao=view&id=<?= $row['ID_PRODUTOS'] ?>"   class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
                     </td>
                 </tr>
-                <script>
-                    // Calcula o valor total para esta linha
-                    var valorUnidade = +<?=$row['VALOR_UNITARIO']?>;
-                    var quantidade = +<?= $row['QUANTIDADE'] ?>;
-                    console.log(valorUnidade);
-                    console.log(quantidade);
-                    var valorTotal = valorUnidade * quantidade;
-                    console.log(valorTotal);
-                    // Atualiza a célula de valor total para esta linha
-                    var valorTotalCell = document.querySelector('.valor-total:last-child');
-                    console.log(valorTotalCell);
-                    valorTotalCell.textContent = valorTotal.toFixed(2);
-                </script>
+             
         <?php
             }
         ?>
