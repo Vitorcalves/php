@@ -63,9 +63,9 @@
                     <label for="nivel" class="form-label">Nível</label>
                     <!-- verifica se há algum nivel em $daos e se houver ele retorna e seleciona, se não ele retorna vazio -->
                     <select name="nivel" id="nivel" class="form-control" required>
-                        <option value=""  <?= isset($dados->nivel) ? $dados->nivel == "" ? "selected" : "" : "" ?>>...</option>
-                        <option value="1" <?= isset($dados->nivel) ? $dados->nivel == 1  ? "selected" : "" : "" ?>>Administrador</option>
-                        <option value="2" <?= isset($dados->nivel) ? $dados->nivel == 2  ? "selected" : "" : "" ?>>Garçom</option>
+                        <option value=""  <?= isset($dados->nivel) ? ($dados->nivel == "" ? "selected" : "") : "" ?>>...</option>
+                        <option value="1" <?= isset($dados->nivel) ? ($dados->nivel == 1  ? "selected" : "") : "" ?>>Administrador</option>
+                        <option value="2" <?= isset($dados->nivel) ? ($dados->nivel == 2  ? "selected" : "") : "" ?>>Garçom</option>
                     </select>
                 </div>
             </div>
@@ -84,9 +84,9 @@
                     <label for="statusRegistro" class="form-label">Status</label>
                     <!-- verifica se há um statusRegistro em $dados se sim retorna e seleciona e se não retorna vázio -->
                     <select name="statusRegistro" id="statusRegistro" class="form-control" required>
-                        <option value=""  <?= isset($dados->statusRegistro) ? $dados->statusRegistro == "" ? "selected" : "" : "" ?>>...</option>
-                        <option value="1" <?= isset($dados->statusRegistro) ? $dados->statusRegistro == 1  ? "selected" : "" : "" ?>>Ativo</option>
-                        <option value="2" <?= isset($dados->statusRegistro) ? $dados->statusRegistro == 2  ? "selected" : "" : "" ?>>Inativo</option>
+                        <option value=""  <?= isset($dados->statusRegistro) ? ($dados->statusRegistro == "" ? "selected" : "") : "" ?>>...</option>
+                        <option value="1" <?= isset($dados->statusRegistro) ? ($dados->statusRegistro == 1  ? "selected" : "") : "" ?>>Ativo</option>
+                        <option value="2" <?= isset($dados->statusRegistro) ? ($dados->statusRegistro == 2  ? "selected" : "") : "" ?>>Inativo</option>
                     </select>
                 </div>
 

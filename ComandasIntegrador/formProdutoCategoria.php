@@ -56,9 +56,9 @@
                     <label for="tipo" class="form-label">Tipo categoria</label>
                     <select name="TIPO_CATEGORIA" id="TIPO_CATEGORIA" class="form-control" required>
                         <!-- Verifica se há algum TIPO_CATEGORIA em dados se houver seleciona e se não houver ele retorna vazio -->
-                        <option value=""  <?= isset($dados->TIPO_CATEGORIA) ? $dados->TIPO_CATEGORIA == "" ? "selected" : "" : "" ?>>...</option>
-                        <option value="1" <?= isset($dados->TIPO_CATEGORIA) ? $dados->TIPO_CATEGORIA == 1  ? "selected" : "" : "" ?>>Produto</option>
-                        <option value="2" <?= isset($dados->TIPO_CATEGORIA) ? $dados->TIPO_CATEGORIA == 2  ? "selected" : "" : "" ?>>Serviço</option>
+                        <option value=""  <?= isset($dados->TIPO_CATEGORIA) ? ($dados->TIPO_CATEGORIA == "" ? "selected" : "") : "" ?>>...</option>
+                        <option value="1" <?= isset($dados->TIPO_CATEGORIA) ? ($dados->TIPO_CATEGORIA == 1  ? "selected" : "") : "" ?>>Produto</option>
+                        <option value="2" <?= isset($dados->TIPO_CATEGORIA) ? ($dados->TIPO_CATEGORIA == 2  ? "selected" : "") : "" ?>>Serviço</option>
                     </select>
                 </div>
 
@@ -66,9 +66,9 @@
                     <label for="STATUS_CATEGORIA" class="form-label">Status</label>
                     <select name="STATUS_CATEGORIA" id="STATUS_CATEGORIA" class="form-control" required>
                         <!-- Verifica se há algum STATUS_CATEGORIA em dados se houver seleciona e se não houver ele retorna vazio -->
-                        <option value=""  <?= isset($dados->STATUS_CATEGORIA) ? $dados->STATUS_CATEGORIA == "" ? "selected" : "" : "" ?>>...</option>
-                        <option value="1" <?= isset($dados->STATUS_CATEGORIA) ? $dados->STATUS_CATEGORIA == 1  ? "selected" : "" : "" ?>>Ativo</option>
-                        <option value="2" <?= isset($dados->STATUS_CATEGORIA) ? $dados->STATUS_CATEGORIA == 2  ? "selected" : "" : "" ?>>Inativo</option>
+                        <option value=""  <?= isset($dados->STATUS_CATEGORIA) ? ($dados->STATUS_CATEGORIA == "" ? "selected" : "") : "" ?>>...</option>
+                        <option value="1" <?= isset($dados->STATUS_CATEGORIA) ? ($dados->STATUS_CATEGORIA == 1  ? "selected" : "") : "" ?>>Ativo</option>
+                        <option value="2" <?= isset($dados->STATUS_CATEGORIA) ? ($dados->STATUS_CATEGORIA == 2  ? "selected" : "") : "" ?>>Inativo</option>
                     </select>
                 </div>
 

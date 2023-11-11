@@ -52,7 +52,7 @@
                 <div class="col-6">
                     <label for="produtocategoria_id" class="form-label">Categoria</label>
                     <select name="produtocategoria_id" id="produtocategoria_id" class="form-control" required>
-                        <option value=""  <?= isset($dados->produtocategoria_id) ? $dados->produtocategoria_id == "" ? "selected" : "" : "" ?>>...</option>
+                        <option value=""  <?= isset($dados->produtocategoria_id) ? ($dados->produtocategoria_id == "" ? "selected" : "") : "" ?>>...</option>
 
                         <?php foreach ($aCategoria as $item): ?>
                             <option value="<?= $item['ID_CATEGORIA'] ?>" <?= (isset($dados->produtocategoria_id) ? ($item['ID_CATEGORIA'] == $dados->produtocategoria_id ?  "selected" : "" ) : "") ?>><?= $item['DESCRICAO_CATEGORIA'] ?></option>
