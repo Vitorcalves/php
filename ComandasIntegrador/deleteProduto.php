@@ -21,6 +21,7 @@
                 unlink('uploads/produto/' . $_POST['excluirImagem']);
             }
 
+            
             return header("Location: listaProduto.php?msgSucesso=Registro excluído com sucesso.");
         } else {
             return header("Location: listaProduto.php?msgError=Falha ao tentar excluír o registro.");
