@@ -1,7 +1,6 @@
 <?php
     require_once "library/Database.php";
     require_once "library/Funcoes.php";
-    var_dump($_GET['status'], $_GET['id']);
     if (isset($_GET['status'])) {
 
         $db = new Database();
