@@ -1,6 +1,11 @@
 <?php
 
-    require_once "helpers/protectNivel.php";
+    if (isset($_GET['acao']) && $_GET['acao'] != 'view') {
+        require_once "helpers/protectNivel.php";
+    } else {
+        require_once "helpers/protectUser.php";
+    }
+
     require_once "helpers/Formulario.php";
     require_once "comuns/cabecalho.php";
     require_once "library/Database.php";
@@ -9,6 +14,9 @@
     $db = new Database();
     $dados = [];
 
+    $id_produtos = $_GET['id_produtos'];
+    $id_comanda = $_GET['idComanda'];
+
     $aCategoria = $db->dbSelect("SELECT * FROM produto_categoria ORDER BY DESCRICAO_CATEGORIA");
 
     /*
@@ -16,7 +24,7 @@
     */
     if ($_GET['acao'] != "insert") {
 
-        $dados = $db->dbSelect("SELECT * FROM produto WHERE ID_PRODUTOS = ?", 'first', [$_GET['id']]);
+        $dados = $db->dbSelect("SELECT * FROM produto WHERE ID_PRODUTOS = ?", 'first', [$id_produtos]);
     }
 ?>
     <!-- inicio da página -->
@@ -36,7 +44,7 @@
             action => recebe a ação que foi adicionada no hyperlink da lista (insert, update, delete) mais Uf.php
         -->
 
-        <form class="g-3" action="<?= $_GET['acao'] ?>Produto.php" method="POST" 
+        <form class="g-3" action="<?= $_GET['acao'] ?>ProdutoComanda.php" method="POST" 
             enctype="multipart/form-data">
 
             <input type="hidden" name="id" id="id" value="<?= isset($dados->ID_PRODUTOS) ? $dados->ID_PRODUTOS : "" ?>">
@@ -92,12 +100,11 @@
                     <label for="caracteristicas" class="form-label">Características</label>
                     <textarea class="form-control" name="caracteristicas" id="caracteristicas"><?= isset($dados->caracteristicas) ? $dados->caracteristicas : "" ?></textarea>
                 </div>
-                
             </div>
 
             <h4 class="mt-3 mb-3">Imagem do Produto</h4>
 
-            <?php if ($_GET['acao'] != "insert"): ?>
+            <?php if ($_GET['acao'] != "insert") : ?>
                 <div class="row">
                     <div class="form-group col-3">
                         <!-- verifica se algum precoVenda em $dados se sim retorna  -->
@@ -106,26 +113,28 @@
                 </div>
             <?php endif; ?>
 
+            <?php if ($_GET['acao'] == "view") : ?>
             <div class="row mt-3">
                 <div class="form-group col-12 col-md-4">
                     <label for="imagem" class="form-label font-weight-bold">Imagem<span class="text-danger">*</span></label>
                     <input type="file" class="form-control-file" name='imagem' id="imagem" accept="image/png, image/jpeg, image/jpg" <?= $_GET['acao'] == 'insert' ? 'required' : '' ?>>
                 </div>
             </div>
-            
+            <?php endif; ?>
             <!-- input hidden para pegar o id e excluir a imagem -->
             <input type="hidden" name="id" id="id" value="<?= (isset($dados->ID_PRODUTOS) ? $dados->ID_PRODUTOS : "") ?>">
             <input type="hidden" name="excluirImagem" id="excluirImagem" value="<?= (isset($dados->imagem) ? $dados->imagem : "") ?>">
+            <input type="hidden" name="idComanda" value="<?= $id_comanda ?>">
+            <input type="hidden" name="id_produtos" value="<?= $id_produtos ?>">
 
             <div class="col-auto mt-5">
-                <a href="listaProduto.php" class="btn btn-outline-secondary btn-sm">Voltar</a>
+                <a href="visualizarItensComanda.php?idComanda=<?= $id_comanda ?>" class="btn btn-outline-secondary btn-sm">Voltar</a>
                 
                 <?php if ($_GET['acao'] != "view"): /* botão gravar não é exibido na visualização dos dados */ ?>
                     <button type="submit" class="btn btn-primary btn-sm">Gravar</button>
                 <?php endif; ?>
             </div>
         </form>
-
     </main>
 
     <!-- JS do ckeditor -->

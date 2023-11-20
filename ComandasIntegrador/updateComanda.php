@@ -1,34 +1,35 @@
 <?php
 
-require_once "library/Database.php";
+    require_once "helpers/protectUser.php";
+    require_once "library/Database.php";
 
-if (isset($_POST['MESA_ID_MESA'])) {
+    if (isset($_POST['MESA_ID_MESA'])) {
 
-    $db = new Database();
+        $db = new Database();
 
-    try {
-        var_dump($_POST['MESA_ID_MESA']);
-        var_dump($_POST['DESCRICAO_COMANDA']);
-        var_dump($_POST['id']);
-        $result = $db->dbUpdate("UPDATE comanda 
-                                SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?
-                                WHERE ID_COMANDA = ?",
-                                [
-                                    $_POST['DESCRICAO_COMANDA'],
-                                    $_POST['MESA_ID_MESA'],
-                                    $_POST['id']
-                                ]);
+        try {
+            var_dump($_POST['MESA_ID_MESA']);
+            var_dump($_POST['DESCRICAO_COMANDA']);
+            var_dump($_POST['id']);
+            $result = $db->dbUpdate("UPDATE comanda 
+                                    SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?
+                                    WHERE ID_COMANDA = ?",
+                                    [
+                                        $_POST['DESCRICAO_COMANDA'],
+                                        $_POST['MESA_ID_MESA'],
+                                        $_POST['id']
+                                    ]);
 
-        if ($result) {
-            return header("Location: listaComanda.php?msgSucesso=Registro alterado com sucesso.");
-        } else {
-            return header("Location: listaComanda.php?msgError=Falha ao tentar alterar o registro.");
+            if ($result) {
+                return header("Location: listaComanda.php?msgSucesso=Registro alterado com sucesso.");
+            } else {
+                return header("Location: listaComanda.php?msgError=Falha ao tentar alterar o registro.");
+            }
+            
+        } catch (Exception $ex) {
+            echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>";
         }
-        
-    } catch (Exception $ex) {
-        echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>";
-    }
 
-} else {
-    return header("Location: index.php");
-}
+    } else {
+        return header("Location: index.php");
+    }

@@ -1,11 +1,15 @@
 <?php
+
+    require_once "helpers/protectUser.php";
     require_once "library/Database.php";
     require_once "library/Funcoes.php";
+
     if (isset($_GET['status'])) {
 
         $db = new Database();
 
         try {
+            
             $id = $_GET['id'];
             $status = $_GET['status'];
             

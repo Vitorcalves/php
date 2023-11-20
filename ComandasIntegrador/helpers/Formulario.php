@@ -17,8 +17,6 @@
             return " - Exclusão";
         } elseif ($acao == "view") {
             return " - Visualização";
-        }else{
-            return "";
         }
     }
 
@@ -50,11 +48,21 @@
     {
         // muda o statusRegistro para 1 = "Ativo" e 2 "Inativo"
         if ($status == 1) {
-            return "Aberta";
+            return "Ativo";
         } elseif ($status == 2) {
-            return "Fechada";
+            return "Inativo";
         } else {
             return "...";
+        }
+    }
+
+    function situacaoMesa($situacao)
+    {
+        // muda o situacao para 1 = "Ativo" e 2 "Inativo"
+        if ($situacao == 1) {
+            return "Disponivel";
+        } else {
+            return "Indisponivel";
         }
     }
 
@@ -130,5 +138,9 @@
                         </div>
                     </div>';
         }
-        return "";
+    }
+
+    function total_valor($quantidade, $Valor){
+        $total = $quantidade * $Valor;
+        return $total;
     }

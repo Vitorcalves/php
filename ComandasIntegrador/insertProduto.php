@@ -1,4 +1,6 @@
 <?php
+
+    require_once "helpers/protectNivel.php";
     require_once "library/Database.php";
     require_once "library/Funcoes.php";
 

@@ -1,52 +1,109 @@
 <?php
+    require_once "helpers/protectNivel.php";
     require_once "comuns/cabecalho.php";
     require_once "library/Database.php";
 
     $dataAtual = date('Y-m-d');
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Data</title>
-</head>
-<body>
-    <h2>Informe o Período de Busca</h2>
-
-    <form method="post" action="RelatorioSQL.php">
-        <label for="data_inicial">Data Inicial:</label>
-        <input type="date" id="data_inicial" name="data_inicial" value="<?php echo $dataAtual; ?>" required>
-
-        <label for="data_final">Data Final:</label>
-        <input type="date" id="data_final" name="data_final" value="<?php echo $dataAtual; ?>" required>
-
-        <div class="container row mt-3">
-            <div class="card text-center col-6">
-                <div class="card-header col-6">
-                    Relátorio de produtos vendidos
-                </div>
-        
-                <div class="card-footer text-body-secondary col-6">
-                    <button type="submit">Confirmar</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container row mt-3">
-            <div class="card text-center col-6">
-                <div class="card-header col-6">
-                    Relátorio de faturamento no periodo
-                </div>
-        
-                <div class="card-footer text-body-secondary col-6">
-                    <button type="submit">Confirmar</button>
-                </div>
-            </div>
-        </div>
-    </form>
+    <h2>Relatórios</h2>
 
 
-</body>
-</html>
+    <table align="center" class='mt-3'>
+        <tbody>
+            <tr>
+                <form id='datas' method="post" action="Rel_ProdutosVendidos.php">
+                    <td>
+                        Histórico de Produtos Vendidos   
+                    </td>  
+                    <td>
+                        <label for="data_inicial">Data Inicial:</label>
+                        <input type="date" id="data_inicial" name="data_inicial" value="<?php echo $dataAtual; ?>" required>
+
+                        <label for="data_final">⠀⠀⠀Data Final:</label>
+                        <input type="date" id="data_final" name="data_final" value="<?php echo $dataAtual; ?>" required>    
+                    </td>
+                    <td>   
+                        <button type="submit" class='mt-3'>
+                            Confirmar
+                        </button>
+                    </td>
+                </form>
+            <tr>
+
+
+
+            <tr>
+                <form id='datas' method="post" action="Rel_CategoriasVendidas.php">
+                    <td>
+                        Histórico de Categorias Vendidas   
+                    </td>  
+                    <td>
+                        <label for="data_inicial">Data Inicial:</label>
+                        <input type="date" id="data_inicial" name="data_inicial" value="<?php echo $dataAtual; ?>" required>
+
+                        <label for="data_final">⠀⠀⠀Data Final:</label>
+                        <input type="date" id="data_final" name="data_final" value="<?php echo $dataAtual; ?>" required>    
+                    </td>
+                    <td>   
+                        <button type="submit" class='mt-3'>
+                            Confirmar
+                        </button>
+                    </td>
+                </form>
+            <tr>
+    
+            <tr>
+                <form id='datas' method="post" action="Rel_FormasPagamentos.php">
+                    <td>
+                        Formas de Pagamento pelo Período 
+                    </td>  
+                    <td>
+                        <label for="data_inicial">Data Inicial:</label>
+                        <input type="date" id="data_inicial" name="data_inicial" value="<?php echo $dataAtual; ?>" required>
+
+                        <label for="data_final">⠀⠀⠀Data Final:</label>
+                        <input type="date" id="data_final" name="data_final" value="<?php echo $dataAtual; ?>" required>    
+                    </td>
+                    <td>   
+                        <button type="submit" class='mt-3'>
+                            Confirmar
+                        </button>
+                    </td>
+                </form>
+            <tr>
+
+
+        </tbody>
+    </table>
+
+
+    <style type="text/css">
+
+    h2,h1{
+        text-align: center !important;
+    }
+
+
+    table{
+
+        width: 90% !important;
+    }
+
+    td{
+        border: 1px solid black !important;
+        padding: 5px !important;
+        text-align: center !important;
+    }
+
+
+    tbody tr:nth-child(odd){
+        background-color: ghostwhite !important;
+    }
+
+
+    </style>
+
+    <?php
+        require_once "comuns/rodape.php";
+    ?>

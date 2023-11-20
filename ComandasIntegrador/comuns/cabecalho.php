@@ -28,26 +28,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
+        <div class="d-flex justify-content-around">
+            <a href="listaComanda.php"><img src="/img/logo.png" alt="Imagem logo" style="width: 120; height: 90px; padding: 10px; margin-right: 50px;"> </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="listaComanda.php">Inicio</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="produtos.php">Produtos</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Relatorios.php">relatorios</a>
-                    </li>
                     <!-- Se o usuário estiver no nivel administrador mostra esse dropdown com as área administrativa -->
-                    <?php if (isset($_SESSION['userId']) && ($_SESSION['userNivel'] == 1)): ?>
+                    <!-- <?php if (isset($_SESSION['userId']) && ($_SESSION['userNivel'] == 1)): ?> -->
                     <li class="nav-item dropdown">
                         <!-- mostra o nome do usuário logado -->
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome'] //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
@@ -59,24 +56,28 @@
                             <li><a class="dropdown-item" href="listaProdutoCategoria.php">Categoria de Produtos</a></li>
                             <li><a class="dropdown-item" href="listaProduto.php">Produtos/Serviços</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="listaMesa.php">Mesa</a></li>
-                            <li><a class="dropdown-item" href="listaFormasPagamento.php">Formas de pagamento</a></li>
+                            <!-- <li><a class="dropdown-item" href="listaMesa.php">Mesas</a></li> -->
+                            <li><a class="dropdown-item" href="listaMesa.php">Mesas utilizadas</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="listaFormaPagamento.php">Formas de pagamento</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="Relatorios.php">Relatórios</a></li>
                         </ul>
                     </li>
 
                     <!-- se não estiver logado é executado esse codigo -->
-                    <?php elseif (!isset($_SESSION['userNome'])) : ?>
+                    <!-- <?php elseif (!isset($_SESSION['userNome'])) : ?> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Área administrativa</a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a class="dropdown-item" href="viewLogin.php">Fazer login</a>
+                                <a class="dropdown-item" href="index.php">Fazer login</a>
                             </li>
                         </ul>
                     </li>
 
                     <!-- se o usuário não for um administrador do sistema ele só tem a opção de deslogar -->
-                    <?php else : ?>
+                    <!-- <?php else : ?> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome']  //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
                         <ul class="dropdown-menu">
@@ -86,7 +87,7 @@
                         </ul>
                     </li>
                     <!-- finaliza o if -->
-                    <?php endif; ?>
+                    <!-- <?php endif; ?> -->
                 </ul>
             </div>
         </div>

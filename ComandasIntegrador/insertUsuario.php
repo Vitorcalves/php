@@ -1,5 +1,6 @@
 <?php
 
+    require_once "helpers/protectNivel.php";
     require_once "library/Database.php";
 
     if (isset($_POST['nome'])) {

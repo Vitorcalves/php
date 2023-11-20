@@ -1,6 +1,6 @@
 <?php
 
-    require_once "helpers/protect.php";
+    require_once "helpers/protectNivel.php";
     require_once "helpers/Formulario.php";
     require_once "library/Database.php";
     require_once "comuns/cabecalho.php";
@@ -59,10 +59,10 @@
         </table>
     </main>
 
-<?php
+    <?php
 
-    echo datatables("tbListaUsuario");
+        echo datatables("tbListaUsuario");
 
-    // Carrega o ropdapé HTML
-    require_once "comuns/rodape.php";
-?>
+        // Carrega o ropdapé HTML
+        require_once "comuns/rodape.php";
+    ?>

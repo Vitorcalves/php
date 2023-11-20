@@ -117,7 +117,7 @@ class Database
             }
         
         // se houver algum erro na conexao com o banco de dados é retornado pelo bloco catch
-        }catch (Exception $ex) {
+        } catch (Exception $ex) {
             echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>"; exit;
             return false;
         }

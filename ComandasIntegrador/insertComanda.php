@@ -1,4 +1,6 @@
 <?php
+
+    require_once "helpers/protectUser.php";
     require_once "library/Database.php";
 
     if (isset($_POST['MESA_ID_MESA'])) {

@@ -1,5 +1,6 @@
 <?php 
 
+    require_once "helpers/protectUser.php";
     require_once "comuns/cabecalho.php";
     require_once "helpers/Formulario.php";
     require_once "library/Database.php";
@@ -50,13 +51,13 @@
                             <td><?= $row['MESA_ID_MESA'] ?></td>
                             <td><?= getStatusDescricao($row['SITUACAO_COMANDA']) ?></td>
                             <td>
-                                <a href="formComanda.php?acao=update&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração">Alterar</a>&nbsp;
-                                <a href="formComanda.php?acao=delete&id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-danger btn-sm" title="Exclusão">Excluir</a>&nbsp;
-                                <a href="visualizarItensComanda.php?id=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
+                                <a href="formComanda.php?acao=update&idComanda=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração">Alterar</a>&nbsp;
+                                <a href="formComanda.php?acao=delete&idComanda=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-danger btn-sm" title="Exclusão">Excluir</a>&nbsp;
+                                <a href="visualizarItensComanda.php?idComanda=<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-secondary btn-sm" title="Visualização">Visualizar</a>
+                                <a href="visualizarItensComanda.php?idComanda=<?= $row['ID_COMANDA'] ?>&situacaoComanda=<?= $row['SITUACAO_COMANDA'] ?>"" class="btn btn-outline-warning btn-sm" title="Visualização"><?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?></a>
                                 
-                                
-                                <button id="<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status(this)"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>
-
+                                <!-- <button id="<?= $row['ID_COMANDA'] ?>" class="btn btn-outline-primary btn-sm" title="Alteração" onclick="alterar_status(this)"> <?= isset($row['SITUACAO_COMANDA']) ? ($row['SITUACAO_COMANDA'] == 1  ? "Fechar" : "Abrir") : "ERRO"?> </button>                             -->
+                            
                             </td>
                         </tr>
                         <?php
@@ -64,33 +65,36 @@
                     ?>
             </tbody>
         </table>
-                    <script>
-                        const tabela = <?= json_encode($data) ?>;
-                        var comanda;
-                        
-                        function alterar_status(botao){
-                            let id = +botao.id;
-
-                            comanda = tabela.find(item => item.ID_COMANDA === id);
-                            
-                            
-                            
-                            let Status= comanda.SITUACAO_COMANDA ;
-                            // id = <?= $row['ID_COMANDA'] ?>;
-                            if(Status == 1){
-                                Status = 2;
-                            }else{
-                                Status = 1;
-                            }
-                            window.location.href = "alterarStatusComanda.php?status="+Status+"&id="+id;
-                            }
-                    </script>
     </main>
 
-<?php
+    <script>
 
-    echo datatables("tbListaComandas");
+        const tabela = <?= json_encode($data) ?>;
+        var comanda;
 
-    // Carrega o ropdapé HTML
-    require_once "comuns/rodape.php";
-?>
+        function alterar_status(botao){
+
+            let id = +botao.id;
+
+            comanda = tabela.find(item => item.ID_COMANDA === id);
+            
+            
+            let Status = <?= $row['SITUACAO_COMANDA'] ;
+            // id = <?= $row['ID_COMANDA'] ?>;
+            if(Status == 1){
+                Status = 2;
+            }else{
+                Status = 1;
+            }
+            window.location.href = "alterarStatusComanda.php?status="+Status+"&id="+id;
+            }
+        
+    </script>
+
+    <?php
+
+        echo datatables("tbListaComandas");
+
+        // Carrega o ropdapé HTML
+        require_once "comuns/rodape.php";
+    ?>

@@ -1,63 +1,65 @@
 <?php
 
-require_once "library/Database.php";
+    require_once "helpers/protectNivel.php";
 
-if (isset($_POST['nome'])) {
+    require_once "library/Database.php";
 
-    $db = new Database();
+    if (isset($_POST['nome'])) {
 
-    try {
+        $db = new Database();
 
-        if (!empty($_POST['senha'])) {
+        try {
 
-            if (trim($_POST['senha']) == trim($_POST['confSenha'])) {
+            if (!empty($_POST['senha'])) {
 
-                $result = $db->dbUpdate("UPDATE usuario 
-                                SET nome = ?, email = ?, statusRegistro = ?, nivel = ?, senha = ?
-                                WHERE id = ?",
-                                [
-                                    $_POST['nome'],
-                                    $_POST['email'],
-                                    $_POST['statusRegistro'],
-                                    $_POST['nivel'],
-                                    password_hash(trim($_POST['senha']), PASSWORD_DEFAULT),
-                                    $_POST['id']
-                                ]);
+                if (trim($_POST['senha']) == trim($_POST['confSenha'])) {
 
-                if ($result) {
-                return header("Location: listaUsuario.php?msgSucesso=Registro alterado com sucesso.");
-                } else {
-                return header("Location: listaUsuario.php?msgError=Falha ao tentar alterar o registro.");
-                }
-
-            } else {
-                return header("Location: listaUsuario.php?msgError=Senha não confere.");
-            }
-
-        } else {
-
-            $result = $db->dbUpdate("UPDATE usuario 
-                                    SET nome = ?, email = ?, statusRegistro = ?, nivel = ?
+                    $result = $db->dbUpdate("UPDATE usuario 
+                                    SET nome = ?, email = ?, statusRegistro = ?, nivel = ?, senha = ?
                                     WHERE id = ?",
                                     [
                                         $_POST['nome'],
                                         $_POST['email'],
                                         $_POST['statusRegistro'],
                                         $_POST['nivel'],
+                                        password_hash(trim($_POST['senha']), PASSWORD_DEFAULT),
                                         $_POST['id']
                                     ]);
 
-            if ($result) {
-            return header("Location: listaUsuario.php?msgSucesso=Registro alterado com sucesso.");
+                    if ($result) {
+                    return header("Location: listaUsuario.php?msgSucesso=Registro alterado com sucesso.");
+                    } else {
+                    return header("Location: listaUsuario.php?msgError=Falha ao tentar alterar o registro.");
+                    }
+
+                } else {
+                    return header("Location: listaUsuario.php?msgError=Senha não confere.");
+                }
+
             } else {
-            return header("Location: listaUsuario.php?msgError=Falha ao tentar alterar o registro.");
+
+                $result = $db->dbUpdate("UPDATE usuario 
+                                        SET nome = ?, email = ?, statusRegistro = ?, nivel = ?
+                                        WHERE id = ?",
+                                        [
+                                            $_POST['nome'],
+                                            $_POST['email'],
+                                            $_POST['statusRegistro'],
+                                            $_POST['nivel'],
+                                            $_POST['id']
+                                        ]);
+
+                if ($result) {
+                return header("Location: listaUsuario.php?msgSucesso=Registro alterado com sucesso.");
+                } else {
+                return header("Location: listaUsuario.php?msgError=Falha ao tentar alterar o registro.");
+                }
             }
+
+        } catch (Exception $ex) {
+            echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>";
         }
 
-    } catch (Exception $ex) {
-        echo '<p style="color: red;">ERROR: '. $ex->getMessage(). "</p>";
+    } else {
+        return header("Location: listaUsuario.php");
     }
-
-} else {
-    return header("Location: listaUsuario.php");
-}

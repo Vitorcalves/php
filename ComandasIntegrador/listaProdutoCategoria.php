@@ -1,4 +1,6 @@
 <?php
+    require_once "helpers/protectNivel.php";
+
     require_once "library/Database.php";
 
     // Carrega cabeçalho HTML (header, nav, etc...)
@@ -85,7 +87,7 @@
 
     <?php
 
-    echo datatables('tbListaProdutoCategoria');
+        echo datatables('tbListaProdutoCategoria');
 
-    // Carrega o ropdapé HTML
-    require_once "comuns/rodape.php";
+        // Carrega o ropdapé HTML
+        require_once "comuns/rodape.php";

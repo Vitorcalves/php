@@ -1,4 +1,6 @@
 <?php
+
+    require_once "helpers/protectNivel.php";
     // carrega a classe do banco de dados
     require_once "library/Database.php";
 
@@ -21,7 +23,6 @@
                 unlink('uploads/produto/' . $_POST['excluirImagem']);
             }
 
-            
             return header("Location: listaProduto.php?msgSucesso=Registro excluído com sucesso.");
         } else {
             return header("Location: listaProduto.php?msgError=Falha ao tentar excluír o registro.");

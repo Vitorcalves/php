@@ -30,22 +30,22 @@
                                             "maycon7ads@gmail.com",
                                         ]);
 
-                return header("Location: viewLogin.php?msgSucesso=Super usuário criado com sucesso.");
+                return header("Location: index.php?msgSucesso=Super usuário criado com sucesso.");
 
             } else {
-                return header("Location: viewLogin.php?msgError=Login ou senha inválido");
+                return header("Location: index.php?msgError=Login ou senha inválido");
             }
 
         } else {
 
             // verifica o status do usuário
             if ($data->statusRegistro != 1) {
-                return header("Location: viewLogin.php?msgError=Usuário bloqueado, favor entrar em contato com o Administrador.");
+                return header("Location: index.php?msgError=Usuário bloqueado, favor entrar em contato com o Administrador.");
             }
 
             // Verifica a senha
             if (!password_verify(trim($_POST["senha"]), $data->senha) ) {
-                return header("Location: viewLogin.php?msgError=Login ou senha inválido");
+                return header("Location: index.php?msgError=Login ou senha inválido");
             }
 
             //  Criar flag's de usuário logado no sistema
@@ -57,11 +57,11 @@
             
             // Direcionar o usuário para página home
             
-            return header("Location: index.php");
+            return header("Location: listaComanda.php");
         }
 
     } else {
-        return header("Location: viewLogin.php");
+        return header("Location: index.php");
     }
 
     require_once "comuns/cabecalho.php";

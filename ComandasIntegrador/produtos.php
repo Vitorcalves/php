@@ -1,5 +1,7 @@
 <?php 
 
+    require_once "helpers/protectUser.php";
+
     require_once "library/Database.php";
     // Criando o objeto Db para classe de base de dados
     $db = new Database();
@@ -20,13 +22,22 @@
             exit(); // para o script
 
             // recupera todos os itens
-            $data = $db->dbSelect("SELECT p.*, pc.descricao_categoria AS categoriaDescricao FROM produto AS p INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p. STATUS_PRODUTO = 1
-            ORDER BY p.descricao");
-
-    
+            $data = $db->dbSelect(
+                "SELECT p.*, pc.descricao_categoria AS categoriaDescricao
+                FROM produto AS p 
+                INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p.STATUS_PRODUTO = 1
+                ORDER BY p.descricao"
+            );
         }
 
-    } else
+    }elseif(isset($_GET['id_produtos'])){
+        $id_produto = $_GET['id_produtos'];
+        $data = $db->dbSelect("SELECT * FROM produto INNER JOIN produto_categoria ON produto_categoria.ID_CATEGORIA = produto.produtocategoria_id AND produto.STATUS_PRODUTO = 1
+         where ID_PRODUTOS = $id_produto");
+
+    }
+    
+    else
         {
         // se search for vazio recupera todos os itens pc.descricao = capa
         $data = $db->dbSelect(
@@ -71,11 +82,11 @@
         
         <!-- inicio dos cards -->
         <div class="container container-fluid mt-3">      
-            <div class="row row-cols-md-3 g-4">
+            <div class="row">
                 <!-- recupera os dados do array $data e armazena cada linha na variável $item -->
                 <?php foreach ($data as $item): ?> 
-                    <div id="card-<?= $item['ID_PRODUTOS'] ?>" class="col-3">  
-                        <img src="uploads/produto/<?= $item['imagem'] ?>" class="img-fluid" alt="..." style="width: 200px; height: 200px; max-width: 200px; max-height: 200px;">
+                    <div class="card col align-items-center text-center pt-3 m-3" id="card-<?= $item['ID_PRODUTOS'] ?>">  
+                        <img src="uploads/produto/<?= $item['imagem'] ?>" class="img-fluid text-center" alt="..." style="width: 200px; height: 200px; max-width: 200px; max-height: 200px;">
                         <div class="card-body">
                             <h5 class="card-title"> <?= $item['descricao'] ?> </h5>
                             <p class="card-text"> R$ <strong><?= Funcoes::valorBr($item['VALOR_UNITARIO']) ?></strong> </p>
@@ -113,11 +124,11 @@
                 // redirectPageSearch(capa);
             }
         }
+        
     </script>
              
     <?php
 
-    // Carrega o ropdapé HTML
-    require_once "comuns/rodape.php";
+        // Carrega o ropdapé HTML
+        require_once "comuns/rodape.php";
 
-    ?>
