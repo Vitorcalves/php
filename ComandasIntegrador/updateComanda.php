@@ -8,9 +8,7 @@
         $db = new Database();
 
         try {
-            var_dump($_POST['MESA_ID_MESA']);
-            var_dump($_POST['DESCRICAO_COMANDA']);
-            var_dump($_POST['id']);
+           
             $result = $db->dbUpdate("UPDATE comanda 
                                     SET DESCRICAO_COMANDA = ?, MESA_ID_MESA = ?
                                     WHERE ID_COMANDA = ?",

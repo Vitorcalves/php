@@ -56,6 +56,18 @@
         }
     }
 
+    function getStatusComanda($status)
+    {
+        // muda o statusRegistro para 1 = "Aberto" e 2 "Pago"
+        if ($status == 1) {
+            return "Aberto";
+        } elseif ($status == 2) {
+            return "Pago";
+        } else {
+            return "...";
+        }
+    }
+
     function situacaoMesa($situacao)
     {
         // muda o situacao para 1 = "Ativo" e 2 "Inativo"

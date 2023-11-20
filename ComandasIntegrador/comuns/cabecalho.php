@@ -25,6 +25,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
     <!-- Adiciona o bootstrap a página -->
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Adicione a biblioteca jQuery se ainda não estiver incluída -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
@@ -44,10 +47,10 @@
                     </li>
 
                     <!-- Se o usuário estiver no nivel administrador mostra esse dropdown com as área administrativa -->
-                    <!-- <?php if (isset($_SESSION['userId']) && ($_SESSION['userNivel'] == 1)): ?> -->
+                    <?php if (isset($_SESSION['userId']) && ($_SESSION['userNivel'] == 1)): ?>
                     <li class="nav-item dropdown">
                         <!-- mostra o nome do usuário logado -->
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome'] //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
+                        <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome'] //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="logoff.php">Sair</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -66,7 +69,7 @@
                     </li>
 
                     <!-- se não estiver logado é executado esse codigo -->
-                    <!-- <?php elseif (!isset($_SESSION['userNome'])) : ?> -->
+                    <?php elseif (!isset($_SESSION['userNome'])) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Área administrativa</a>
                         <ul class="dropdown-menu">
@@ -77,7 +80,7 @@
                     </li>
 
                     <!-- se o usuário não for um administrador do sistema ele só tem a opção de deslogar -->
-                    <!-- <?php else : ?> -->
+                    <?php else : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome']  //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
                         <ul class="dropdown-menu">
@@ -87,7 +90,7 @@
                         </ul>
                     </li>
                     <!-- finaliza o if -->
-                    <!-- <?php endif; ?> -->
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

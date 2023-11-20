@@ -9,10 +9,7 @@
     $db = new Database();
     $dados = [];
 
-
     $dados = $db->dbSelect("SELECT * FROM comanda WHERE ID_COMANDA = ?", 'first', [$_GET['idComanda']]);
-
-
 
     // $produtosComanda = $db->dbSelect("SELECT * FROM itens_comanda WHERE COMANDA_ID_COMANDA = ?", 'all', [$_GET['id']]);
     $produtos = $db->dbSelect("SELECT * FROM produto ORDER BY descricao");
@@ -26,7 +23,6 @@
     INNER JOIN produto ON itens_comanda.PRODUTOS_ID_PRODUTOS = produto.ID_PRODUTOS
     WHERE COMANDA_ID_COMANDA = ? 
     ORDER BY produto.DESCRICAO", 'all', [$_GET['idComanda']]);
-
     
 ?>
     <main class="container mt-5">

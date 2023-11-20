@@ -53,18 +53,21 @@
 
         if ($upload) {
 
+            $custoTotalEstoque += ($_POST['QTD_ESTOQUE']) * ($_POST['PRECO_FABRICA']);
+
             $result = $db->dbUpdate("UPDATE produto
-                                    SET descricao = ?, caracteristicas = ?, QTD_ESTOQUE = ?, CUSTO_TOTAL_ESTOQUE = ?, VALOR_UNITARIO = ?, STATUS_PRODUTO = ?, imagem = ?, produtocategoria_id = ?
+                                    SET descricao = ?, caracteristicas = ?, QTD_ESTOQUE = ?, CUSTO_TOTAL_ESTOQUE = ?, VALOR_UNITARIO = ?, STATUS_PRODUTO = ?, imagem = ?, ID_PRODUTO_CATEGORIA = ?, LOTE = ?
                                     WHERE ID_PRODUTOS = ?",
                                     [
                                         $_POST['descricao'],
                                         $_POST['caracteristicas'],
                                         Funcoes::strDecimais($_POST['QTD_ESTOQUE']),
-                                        Funcoes::strDecimais($_POST['CUSTO_TOTAL_ESTOQUE']),
+                                        $custoTotalEstoque,
                                         Funcoes::strDecimais($_POST['VALOR_UNITARIO']),
                                         $_POST['STATUS_PRODUTO'],
                                         $imagem,
-                                        $_POST['produtocategoria_id'],
+                                        $_POST['ID_PRODUTO_CATEGORIA'],
+                                        $_POST['LOTE'],
                                         $_POST['id']
                                     ]);
             
