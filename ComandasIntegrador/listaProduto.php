@@ -12,9 +12,7 @@
 
     // Criando o objeto Db para classe de base de dados
     $db = new Database();
-
-    // ... Seu código anterior ...
-
+    
     if (!isset($_GET['idComanda'])) {
         
         // Buscar a lista de Categorias de Produtos na base de dados
@@ -90,7 +88,7 @@
             </div>
         </div>
 
-        <table id="tbListaProduto" class="table table-striped table-hover table-bordered table-responsive-sm">
+        <table id="tbListaProduto" class="table table-striped table-hover table-bordered table-responsive-sm mt-3">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>

@@ -74,7 +74,7 @@
         </div>
 
         <!-- barra de pesquisa -->
-        <div class="box-search col-12">
+        <div class="box-search col-10">
             <input class="form-control mb-2 mt-4" id="pesquisarProduto" type="search" placeholder="Pesquisar">
             <button onclick="searchData()" class="btn btn-outline-secondary mb-2">Pesquisar</button>
         </div>

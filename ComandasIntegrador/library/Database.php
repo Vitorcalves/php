@@ -13,8 +13,8 @@ class Database
         try {
             $conn = new PDO(
                 "mysql:host=localhost;dbname=restaurante", 
-                "vitor", 
-                "xuh7km2&ujGR!U",
+                "root", 
+                "",
                 // define o padrão de codificação que será usado pelo banco de dados
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
             );

@@ -25,7 +25,7 @@
 
         <?= getMensagem() ?>
 
-        <table id="tbListaUsuario" class="table table-striped table-hover table-bordered table-responsive-sm">
+        <table id="tbListaUsuario" class="table table-striped table-hover table-bordered table-responsive-sm mt-3">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>

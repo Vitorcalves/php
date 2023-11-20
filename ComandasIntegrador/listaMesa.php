@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <table id="tbListaProduto" class="table table-striped table-hover table-bordered table-responsive-sm">
+        <table id="tbListaProduto" class="table table-striped table-hover table-bordered table-responsive-sm mt-3">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>

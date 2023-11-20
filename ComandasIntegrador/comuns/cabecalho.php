@@ -52,11 +52,12 @@
                         <!-- mostra o nome do usuário logado -->
                         <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= $_SESSION['userNome'] //. " " . getNivelDescricao($_SESSION['userNivel']) ?></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="logoff.php">Sair</a></li>
+                            <li><a class="dropdown-item" href="Relatorios.php">Relatórios</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="listaUsuario.php">Usuários</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="listaProdutoCategoria.php">Categoria de Produtos</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="listaProduto.php">Produtos/Serviços</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <!-- <li><a class="dropdown-item" href="listaMesa.php">Mesas</a></li> -->
@@ -64,7 +65,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="listaFormaPagamento.php">Formas de pagamento</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="Relatorios.php">Relatórios</a></li>
+                            <li><a class="dropdown-item text-danger" href="logoff.php">Sair</a></li>
                         </ul>
                     </li>
 

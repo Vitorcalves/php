@@ -9,8 +9,13 @@
      $db = new Database();
 
      // Buscar a lista de Rotas na base de dados
-     $data = $db->dbSelect("SELECT * FROM comanda ORDER BY ID_COMANDA");
-     
+     $data = $db->dbSelect("SELECT 
+                                c.*,
+                                IFNULL(DATE_FORMAT(DATA_ABERTURA, '%d/%m/%Y %H:%i:%s'), '') AS Data_Abertura_Formatada, 
+                                IFNULL(DATE_FORMAT(DATA_FECHAMENTO, '%d/%m/%Y %H:%i:%s'), '') AS Data_Fechamento_Formatada
+ 
+                            FROM comanda c 
+                            ORDER BY ID_COMANDA DESC");    
 ?>
 
     <main class="container mt-5">
@@ -26,7 +31,7 @@
 
         <?= getMensagem() ?>
 
-        <table id="tbListaComandas" class="table table-striped table-hover table-bordered table-responsive-sm">
+        <table id="tbListaComandas" class="table table-striped table-hover table-bordered table-responsive-sm mt-3">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
@@ -44,8 +49,8 @@
                         ?>
                         <tr>
                             <td><?= $row['ID_COMANDA'] ?></td>
-                            <td><?= $row['DATA_ABERTURA'] ?></td>
-                            <td><?= $row['DATA_FECHAMENTO'] ?></td>
+                            <td><?= $row['Data_Abertura_Formatada'] ?></td>
+                            <td><?= $row['Data_Fechamento_Formatada'] ?></td>
                             <td><?= $row['DESCRICAO_COMANDA'] ?></td>
                             <td><?= $row['MESA_ID_MESA'] ?></td>
                             <td><?= getStatusDescricao($row['SITUACAO_COMANDA']) ?></td>
