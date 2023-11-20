@@ -17,6 +17,10 @@
         $dados = $db->dbSelect("SELECT * FROM mesas WHERE ID_MESA = ?", 'first', [$_GET['id']]);
     }
 
+    if (($_GET['acao'] == "delete") && $dados->SITUACAO_MESA == 2) {
+        return header("Location: listaMesa.php?msgError=Não é possível excluir uma mesa com comanda em aberto");
+    }
+
 ?>
     <!-- inicio da página -->
     <main class="container mt-5">

@@ -4,6 +4,8 @@
     require_once "library/Database.php";
     require_once "library/Funcoes.php";
 
+    $custoTotalEstoque = 0;
+
     if (isset($_POST['descricao'])) {
 
         $db = new Database();
@@ -44,18 +46,22 @@
 
             if ($upload) {
 
+                $custoTotalEstoque += ($_POST['QTD_ESTOQUE']) * ($_POST['PRECO_FABRICA']);
+
                 $result = $db->dbInsert("INSERT INTO produto
-                                        (descricao, caracteristicas, QTD_ESTOQUE, CUSTO_TOTAL_ESTOQUE, VALOR_UNITARIO, STATUS_PRODUTO, imagem, produtocategoria_id)
-                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                                        (descricao, caracteristicas, QTD_ESTOQUE, CUSTO_TOTAL_ESTOQUE, VALOR_UNITARIO, STATUS_PRODUTO, imagem, ID_PRODUTO_CATEGORIA, PRECO_FABRICA, LOTE)
+                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                                         [
                                             $_POST['descricao'],
                                             $_POST['caracteristicas'],
                                             Funcoes::strDecimais($_POST['QTD_ESTOQUE']),
-                                            Funcoes::strDecimais($_POST['CUSTO_TOTAL_ESTOQUE']),
+                                            Funcoes::strDecimais($custoTotalEstoque),
                                             Funcoes::strDecimais($_POST['VALOR_UNITARIO']),
                                             $_POST['STATUS_PRODUTO'],
                                             $imagem,
-                                            $_POST['produtocategoria_id']
+                                            $_POST['ID_PRODUTO_CATEGORIA'],
+                                            $_POST['PRECO_FABRICA'],
+                                            $_POST['LOTE']
                                         ]);
 
                 if ($result) {

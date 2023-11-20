@@ -72,7 +72,6 @@
         $pdo = null; } 
     ?>
 
-
     <style type="text/css">
 
         h2,h1{

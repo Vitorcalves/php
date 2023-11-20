@@ -9,7 +9,6 @@
      $db = new Database();
 
      // Buscar a lista de Rotas na base de dados
- 
      $data = $db->dbSelect("SELECT * FROM comanda ORDER BY ID_COMANDA");
      
 ?>

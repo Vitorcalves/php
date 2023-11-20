@@ -15,7 +15,15 @@
             
 
             if ($status == 2) {
-                $horario = date('Y-m-d H:i:s');
+                
+                // Defina o fuso horário para a sua localidade (por exemplo, 'America/Sao_Paulo')
+                $timezone = new DateTimeZone('America/Sao_Paulo');
+
+                // Crie um objeto DateTime com a localidade configurada
+                $date = new DateTime('now', $timezone);
+
+                // Obtenha a data e hora no formato desejado
+                $horario = $date->format('Y-m-d H:i:s');
 
                 $result = $db->dbUpdate("UPDATE comanda
                                         SET SITUACAO_COMANDA = ?,

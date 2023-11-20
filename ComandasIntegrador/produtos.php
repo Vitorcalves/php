@@ -25,7 +25,7 @@
             $data = $db->dbSelect(
                 "SELECT p.*, pc.descricao_categoria AS categoriaDescricao
                 FROM produto AS p 
-                INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p.STATUS_PRODUTO = 1
+                INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.ID_PRODUTO_CATEGORIA AND p.STATUS_PRODUTO = 1
                 ORDER BY p.descricao"
             );
         }
@@ -43,7 +43,7 @@
         $data = $db->dbSelect(
             "SELECT p.*, pc.descricao_categoria AS categoriaDescricao
             FROM produto AS p 
-            INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.produtocategoria_id AND p.STATUS_PRODUTO = 1
+            INNER JOIN produto_categoria as pc ON pc.ID_CATEGORIA = p.ID_PRODUTO_CATEGORIA AND p.STATUS_PRODUTO = 1
             ORDER BY p.descricao"
         );
     }
@@ -86,11 +86,11 @@
                 <!-- recupera os dados do array $data e armazena cada linha na variável $item -->
                 <?php foreach ($data as $item): ?> 
                     <div class="card col align-items-center text-center pt-3 m-3" id="card-<?= $item['ID_PRODUTOS'] ?>">  
-                        <img src="uploads/produto/<?= $item['imagem'] ?>" class="img-fluid text-center" alt="..." style="width: 200px; height: 200px; max-width: 200px; max-height: 200px;">
+                        <img src="uploads/produto/<?= $item['IMAGEM'] ?>" class="img-fluid text-center" alt="..." style="width: 200px; height: 200px; max-width: 200px; max-height: 200px;">
                         <div class="card-body">
-                            <h5 class="card-title"> <?= $item['descricao'] ?> </h5>
+                            <h5 class="card-title"> <?= $item['DESCRICAO'] ?> </h5>
                             <p class="card-text"> R$ <strong><?= Funcoes::valorBr($item['VALOR_UNITARIO']) ?></strong> </p>
-                            <p class="card-text"><?= substr($item['caracteristicas'], 0, 70) ?></p>
+                            <p class="card-text"><?= substr($item['CARACTERISTICAS'], 0, 70) ?></p>
                             <a href="produtosDetalhes.php?id=<?= $item['ID_PRODUTOS'] ?>" class="btn btn-primary">Mais detalhes</a>
                         </div>
                     </div>

@@ -27,7 +27,7 @@
                                             1,
                                             "Administrador",
                                             password_hash("admin", PASSWORD_DEFAULT),
-                                            "maycon7ads@gmail.com",
+                                            "sistemacomanda@gmail.com",
                                         ]);
 
                 return header("Location: index.php?msgSucesso=Super usuário criado com sucesso.");
@@ -56,7 +56,6 @@
             $_SESSION["userSenha"]  = $data->senha;
             
             // Direcionar o usuário para página home
-            
             return header("Location: listaComanda.php");
         }
 

@@ -11,9 +11,9 @@
     require_once "library/Funcoes.php";
 
     // verifica se o usuario está logado
-    // if (!Funcoes::userLogado()) {
-    //     return header("Location: index.php");
-    // }
+    if (!Funcoes::userLogado()) {
+        return header("Location: index.php");
+    }
 
     // $db recebe a conexão com o banco de dados
     $db = new Database();

@@ -54,12 +54,10 @@
         </tbody>
     </table>
 
-
     <?php
         $pdo = null;
     }
     ?>
-
 
     <style type="text/css">
 

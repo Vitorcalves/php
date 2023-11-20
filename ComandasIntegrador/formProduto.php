@@ -18,6 +18,8 @@
 
         $dados = $db->dbSelect("SELECT * FROM produto WHERE ID_PRODUTOS = ?", 'first', [$_GET['id']]);
     }
+
+    $custoTotalEstoque;
 ?>
     <!-- inicio da página -->
     <main class="container mt-5">
@@ -43,20 +45,26 @@
 
             <div class="row">
 
-                <div class="col-12">
+                <div class="col-10">
                     <label for="descricao" class="form-label">Descrição</label>
                     <input type="text" class="form-control" name="descricao" 
-                        id="descricao" placeholder="Descriçào da categoria" required maxlength="50"
-                        value="<?= isset($dados->descricao) ? $dados->descricao : "" ?>">
+                        id="descricao" placeholder="Descrição do produto" required maxlength="50"
+                        value="<?= isset($dados->DESCRICAO) ? $dados->DESCRICAO : "" ?>">
+                </div>
+
+                <div class="col-2">
+                    <label for="LOTE" class="form-label">Lote</label>
+                    <input type="text" class="form-control" name="LOTE" id="LOTE"
+                            value="<?= isset($dados->LOTE) ? $dados->LOTE : '' ?>" placeholder="EX: Lote 1">
                 </div>
 
                 <div class="col-6">
-                    <label for="produtocategoria_id" class="form-label">Categoria</label>
-                    <select name="produtocategoria_id" id="produtocategoria_id" class="form-control" required>
-                        <option value=""  <?= isset($dados->produtocategoria_id) ? $dados->produtocategoria_id == "" ? "selected" : "" : "" ?>>...</option>
+                    <label for="ID_PRODUTO_CATEGORIA" class="form-label">Categoria</label>
+                    <select name="ID_PRODUTO_CATEGORIA" id="ID_PRODUTO_CATEGORIA" class="form-control" required>
+                        <option value=""  <?= isset($dados->ID_PRODUTO_CATEGORIA) ? $dados->ID_PRODUTO_CATEGORIA == "" ? "selected" : "" : "" ?>>...</option>
 
                         <?php foreach ($aCategoria as $item): ?>
-                            <option value="<?= $item['ID_CATEGORIA'] ?>" <?= (isset($dados->produtocategoria_id) ? ($item['ID_CATEGORIA'] == $dados->produtocategoria_id ?  "selected" : "" ) : "") ?>><?= $item['DESCRICAO_CATEGORIA'] ?></option>
+                            <option value="<?= $item['ID_CATEGORIA'] ?>" <?= (isset($dados->ID_PRODUTO_CATEGORIA) ? ($item['ID_CATEGORIA'] == $dados->ID_PRODUTO_CATEGORIA ?  "selected" : "" ) : "") ?>><?= $item['DESCRICAO_CATEGORIA'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -70,19 +78,28 @@
                     </select>
                 </div>
 
-                <div class="col-4">
+
+                <div class="<?= ($_GET['acao'] == 'insert') ? 'col-4' : 'col-6' ?>">
                     <label for="QTD_ESTOQUE" class="form-label">Qtde Em Estoque</label>
                     <input type="text" class="form-control" name="QTD_ESTOQUE" id="QTD_ESTOQUE"  dir="rtl"
                             value="<?= isset($dados->QTD_ESTOQUE) ? $dados->QTD_ESTOQUE : '0,000' ?>">
                 </div>
 
-                <div class="col-4">
-                    <label for="CUSTO_TOTAL_ESTOQUE" class="form-label">Custo Total Estoque</label>
-                    <input type="text" class="form-control" name="CUSTO_TOTAL_ESTOQUE" id="CUSTO_TOTAL_ESTOQUE" dir="rtl" 
-                            value="<?= isset($dados->CUSTO_TOTAL_ESTOQUE) ? $dados->CUSTO_TOTAL_ESTOQUE : '0,00' ?>">
+                <div class="<?= ($_GET['acao'] == 'insert') ? 'col-4' : 'col-6' ?>">
+                    <label for="PRECO_FABRICA" class="form-label">Preço de fabrica</label>
+                    <input type="text" class="form-control" name="PRECO_FABRICA" id="PRECO_FABRICA"  dir="rtl"
+                            value="<?= isset($dados->PRECO_FABRICA) ? $dados->PRECO_FABRICA : '0,000' ?>">
                 </div>
 
-                <div class="col-4">
+                <?php if ($_GET['acao'] != 'insert') : ?>
+                <div class="col-6">
+                    <label for="CUSTO_TOTAL_ESTOQUE" class="form-label">Custo Total Estoque</label>
+                    <input type="text" class="form-control" name="CUSTO_TOTAL_ESTOQUE" id="CUSTO_TOTAL_ESTOQUE" dir="rtl" 
+                            value="<?= isset($dados->CUSTO_TOTAL_ESTOQUE) ? $dados->CUSTO_TOTAL_ESTOQUE : '0,00' ?>" disabled>
+                </div>
+                <?php endif; ?>
+
+                <div class="<?= ($_GET['acao'] == 'insert') ? 'col-4' : 'col-6' ?>">
                     <label for="VALOR_UNITARIO" class="form-label">Preço de Venda</label>
                     <input type="text" class="form-control" name="VALOR_UNITARIO" id="VALOR_UNITARIO" dir="rtl"
                             value="<?= isset($dados->VALOR_UNITARIO) ? $dados->VALOR_UNITARIO : '0,00' ?>">
@@ -90,9 +107,8 @@
 
                 <div class="col-12">
                     <label for="caracteristicas" class="form-label">Características</label>
-                    <textarea class="form-control" name="caracteristicas" id="caracteristicas"><?= isset($dados->caracteristicas) ? $dados->caracteristicas : "" ?></textarea>
+                    <textarea class="form-control" name="caracteristicas" id="caracteristicas"><?= isset($dados->CARACTERISTICAS) ? $dados->CARACTERISTICAS : "" ?></textarea>
                 </div>
-                
             </div>
 
             <h4 class="mt-3 mb-3">Imagem do Produto</h4>
@@ -101,7 +117,7 @@
                 <div class="row">
                     <div class="form-group col-3">
                         <!-- verifica se algum precoVenda em $dados se sim retorna  -->
-                        <img src="uploads/produto/<?= $dados->imagem ?>" alt="..." class="img-thumbnail" width="200" height="200">   
+                        <img src="uploads/produto/<?= $dados->IMAGEM ?>" alt="..." class="img-thumbnail" width="200" height="200">   
                     </div>
                 </div>
             <?php endif; ?>
@@ -115,7 +131,7 @@
             
             <!-- input hidden para pegar o id e excluir a imagem -->
             <input type="hidden" name="id" id="id" value="<?= (isset($dados->ID_PRODUTOS) ? $dados->ID_PRODUTOS : "") ?>">
-            <input type="hidden" name="excluirImagem" id="excluirImagem" value="<?= (isset($dados->imagem) ? $dados->imagem : "") ?>">
+            <input type="hidden" name="excluirImagem" id="excluirImagem" value="<?= (isset($dados->IMAGEM) ? $dados->IMAGEM : "") ?>">
 
             <div class="col-auto mt-5">
                 <a href="listaProduto.php" class="btn btn-outline-secondary btn-sm">Voltar</a>

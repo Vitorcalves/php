@@ -8,7 +8,6 @@
 
     <h2>Relatórios</h2>
 
-
     <table align="center" class='mt-3'>
         <tbody>
             <tr>
@@ -30,8 +29,6 @@
                     </td>
                 </form>
             <tr>
-
-
 
             <tr>
                 <form id='datas' method="post" action="Rel_CategoriasVendidas.php">
@@ -72,8 +69,6 @@
                     </td>
                 </form>
             <tr>
-
-
         </tbody>
     </table>
 

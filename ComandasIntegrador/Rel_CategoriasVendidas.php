@@ -65,12 +65,10 @@
         </tbody>
     </table>
 
-
     <?php
         $pdo = null;
     }
     ?>
-
 
     <style type="text/css">
 
@@ -87,7 +85,6 @@
             padding: 5px !important;
             text-align: center !important;
         }
-
 
         tbody tr:nth-child(odd){
             background-color: ghostwhite !important;

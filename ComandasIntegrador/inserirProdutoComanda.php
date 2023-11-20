@@ -6,38 +6,40 @@
 
     $db = new Database();
 
-    var_dump($_POST);
     $idComanda = (int)$_POST['idComanda'];
     $quantidade = (int)$_POST['quantidade'];
     $idProduto = (int)$_POST['idProduto'];
-    $atualizadoBanco = false;
-    $produtosComanda = $db->dbSelect("SELECT * FROM itens_comanda WHERE COMANDA_ID_COMANDA = ? ORDER BY COMANDA_ID_COMANDA" , 'all', [$_POST['idComanda']]);
-    $produto = $db->dbSelect("SELECT * FROM produto WHERE ID_PRODUTOS = ?", 'fist', [$idProduto]);
-    echo "<br>";
+
+    // Obtém o item da comanda relacionado ao produto
+    $itemComanda = $db->dbSelect(
+        "SELECT * FROM itens_comanda WHERE COMANDA_ID_COMANDA = ? AND PRODUTOS_ID_PRODUTOS = ?",
+        'first',
+        [$idComanda, $idProduto]
+    );
+
+    // Se o item já existir na comanda, atualiza a quantidade
+    if ($itemComanda) {
+        $quantidadeAtual = $itemComanda->QUANTIDADE + $quantidade;
+        $db->dbUpdate(
+            "UPDATE itens_comanda SET QUANTIDADE = ? WHERE COMANDA_ID_COMANDA = ? AND PRODUTOS_ID_PRODUTOS = ?",
+            [$quantidadeAtual, $idComanda, $idProduto]
+        );
+    } else {
+        // Se o item não existir na comanda, insere um novo registro
+        $db->dbInsert(
+            "INSERT INTO itens_comanda (QUANTIDADE, COMANDA_ID_COMANDA, PRODUTOS_ID_PRODUTOS) VALUES (?, ?, ?)",
+            [$quantidade, $idComanda, $idProduto]
+        );
+    }
+
+    // Subtrai a quantidade adicionada do estoque
+    $produto = $db->dbSelect("SELECT * FROM produto WHERE ID_PRODUTOS = ?", 'first', [$idProduto]);
+    $custoTotalEstoque = ($produto->QTD_ESTOQUE) * ($produto->PRECO_FABRICA);
     $quantidadeEstoque = $produto->QTD_ESTOQUE - $quantidade;
-    var_dump($quantidadeEstoque);
-    echo "<br>";
-    var_dump($produto);
+    $db->dbUpdate("UPDATE produto SET QTD_ESTOQUE = ?, CUSTO_TOTAL_ESTOQUE = ? WHERE ID_PRODUTOS = ?", [$quantidadeEstoque, $custoTotalEstoque, $idProduto]);
 
-    foreach ($produtosComanda as $item) {
-        if($item['PRODUTOS_ID_PRODUTOS'] == $idProduto){
-            $quantidade = $quantidade + $item['QUANTIDADE'];
-            $db->dbUpdate("UPDATE itens_comanda SET QUANTIDADE = ? WHERE COMANDA_ID_COMANDA = ? AND PRODUTOS_ID_PRODUTOS = ?", [$quantidade, $idComanda, $idProduto]);
-            $db->dbUpdate("UPDATE produto SET QTD_ESTOQUE = ? WHERE ID_PRODUTOS = ?", [$quantidadeEstoque, $idProduto]);
-            header("Location: visualizarItensComanda.php?idComanda=$idComanda");
-            $atualizadoBanco = true;
-        }
+    header("Location: visualizarItensComanda.php?idComanda=$idComanda");
 
-    }
-
-    if ($atualizadoBanco == false){
-        $db->dbInsert("INSERT INTO itens_comanda (QUANTIDADE, COMANDA_ID_COMANDA, PRODUTOS_ID_PRODUTOS) VALUES (?, ?, ?)", [$quantidade, $idComanda, $idProduto]);
-        $db->dbUpdate("UPDATE produto SET QTD_ESTOQUE = ? WHERE ID_PRODUTOS = ?", [$quantidadeEstoque, $idProduto]);
-        header("Location: visualizarItensComanda.php?idComanda=$idComanda");
-    }
-    
-    var_dump($produto["QTD_ESTOQUE"]);
-    
     
 
 

@@ -17,8 +17,11 @@
         $dados = $db->dbSelect("SELECT * FROM comanda WHERE ID_COMANDA = ?", 'first', [$_GET['idComanda']]);
     }
 
-
+    if (($_GET['acao'] == "delete") && $dados->DATA_FECHAMENTO === null) {
+        return header("Location: listaComanda.php?msgError=Não é possível excluir uma comanda em abertos");
+    }
 ?>
+
     <main class="container mt-5">
         <div class="row">
             <div class="col-10">
@@ -30,7 +33,8 @@
         </div>
 
         <form class="g-3" action="<?= $_GET['acao'] ?>Comanda.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_COMANDA : "" ?>">
+            <input type="hidden" name="idComanda" value="<?= isset($dados->ID_COMANDA) ? $dados->ID_COMANDA : "" ?>">
+            <?= var_dump($dados) ?>
 
             <div class="row">
                 <div class="col-12">
@@ -56,6 +60,7 @@
             <?php if ($_GET['acao'] != "view"): /* botão gravar não é exibido na visualização dos dados */ ?>
                     <button type="submit" class="btn btn-primary btn-sm">Gravar</button>
             <?php endif; ?>
+
         </form>
     </main>
 

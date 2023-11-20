@@ -3,7 +3,7 @@
     require_once "comuns/cabecalho.php";
     require_once "library/Database.php";
 
-    ?>
+?>
 
     <section class="about section-margin">
 
@@ -67,5 +67,5 @@
 
     <?php
 
-    // Carrega o ropdapé HTML
-    require_once "comuns/rodape.php";
+        // Carrega o ropdapé HTML
+        require_once "comuns/rodape.php";
